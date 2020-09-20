@@ -7,11 +7,13 @@
     <groupId>com.github.redis-client-async</groupId>
     <artifactId>redis-async</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>redis-async</name>
 
     <properties>
         <java.version>1.8</java.version>
         <github.global.server>github</github.global.server>
-        <github.maven-plugin>0.9</github.maven-plugin>
+        <github.maven-plugin>0.12</github.maven-plugin>
     </properties>
 
     <dependencies>
@@ -21,14 +23,6 @@
             <version>4.1.10.Final</version>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>internal.repo</id>
-            <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
-        </repository>
-    </distributionManagement>
 
     <build>
         <plugins>
@@ -43,7 +37,7 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.1</version>
                 <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/redis-async-repo</altDeploymentRepository>
                 </configuration>
             </plugin>
             <plugin>
@@ -53,9 +47,12 @@
                 <configuration>
                     <message>Maven artifacts for ${project.version}</message>
                     <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/redis-client-build</outputDirectory>
-                    <branch>refs/heads/redis-client-build</branch>
-                    <includes><include>**/*</include></includes>
+                    <outputDirectory>${project.build.directory}/redis-async-repo</outputDirectory>
+                    <branch>refs/heads/redis-async-repo</branch>
+                    <merge>true</merge>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
                     <repositoryName>redis-client-async</repositoryName>
                     <repositoryOwner>dimail777</repositoryOwner>
                 </configuration>
@@ -70,5 +67,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${project.build.directory}/redis-async-repo</url>
+        </repository>
+    </distributionManagement>
 
 </project>
