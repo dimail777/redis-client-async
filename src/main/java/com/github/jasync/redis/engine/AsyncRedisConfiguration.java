@@ -12,6 +12,13 @@ public class AsyncRedisConfiguration {
     private int maxPendingCommands = 10000;
     private long commandTimeout = 10000;
 
+    public static AsyncRedisConfiguration withDefault() {
+        return new AsyncRedisConfiguration();
+    }
+
+    private AsyncRedisConfiguration() {
+    }
+
     public String getHost() {
         return host;
     }
